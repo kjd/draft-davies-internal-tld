@@ -1,5 +1,5 @@
 ---
-title: A top-level domain for private use
+title: A Top-level Domain for Private Use
 abbrev: Private use top-level domain
 docname: draft-davies-internal-tld-latest
 stand_alone: true
@@ -45,15 +45,15 @@ use in private applications.
 
 There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
-the broader Domain Name System, such as within closed corporate or home networks. 
+the global domain name system (DNS), such as within closed corporate or home networks. 
 
 Long ago, private-use IP address ranges were set aside {{RFC1918}} for
 a similar purpose. IANA nominally acts as a steward for this address space
 which allows for individual network users to use the specified ranges for
 applications that are not intended to be globally routable.
 
-The "internal" top-level domain has been reserved to provide this purpose in
-the Domain Name System. Such domains will not resolve in the global DNS, but
+IANA now reserves "internal" top-level domain to provide this purpose in
+the DNS. Such domains will not resolve in the global DNS, but
 can be configured within closed networks as the network operator sees fit.
 
 # Using the ".internal" Namespace
@@ -64,18 +64,20 @@ can be configured within closed networks as the network operator sees fit.
 
 The document requires no IANA actions.
 
+<!--
 ... given the birthing process, I assume there is no desire/plan for
 this to be designated as a special-use domain. If there is it requires
 standards action or IESG approval, and then it would be an IANA action
 to designate it as such.
+-->
 
 # Security Considerations
 
-While the name space is designated as for private use, there is no
+Even though the name space is designated as for private use, there is no
 guarantee that the names utilized in this namespace will not leak into
 the broader Internet. Such usage may include appearance in log files,
 email headers, and the like. Users, therefore, should not rely on the
-confidentiality of the namespace.
+confidentiality of the .internal namespace.
 
 Users should also not assume the appearance of such names is indicative of
 the true source of transmissions. When diagnosing network issues, the
