@@ -47,8 +47,8 @@ There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
 the global domain name system (DNS), such as within closed corporate or home networks. 
 
-Long ago, private-use IP address ranges were set aside {{RFC1918}} for
-a similar purpose. IANA nominally acts as a steward for this address space
+Long ago, private-use IP address ranges were set aside (e.g. {{RFC1918}}) for
+a similar purpose. IANA nominally acts as a steward for private use address space
 which allows for individual network users to use the specified ranges for
 applications that are not intended to be globally routable.
 
