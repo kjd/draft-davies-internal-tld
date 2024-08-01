@@ -25,6 +25,10 @@ author:
     email: andrew.mcconachie@icann.org
 informative:
   RFC1918:
+  RFC2119:
+  RFC8174:
+  RFC9476:
+  RFC9499:
   SAC113:
     title: "SSAC Advisory on Private-Use TLDs"
     target: https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-113-en.pdf
@@ -33,10 +37,14 @@ informative:
     title: "Identification of a top-level domain for private use"
     target: https://itp.cdn.icann.org/en/files/root-system/identification-tld-private-use-24-01-2024-en.pdf
     date: 2024-01
+  ICANN-Board-Resolution:
+    title: "Reserving .INTERNAL for Private-Use Applications"
+    target: https://www.icann.org/en/board-activities-and-meetings/materials/approved-resolutions-special-meeting-of-the-icann-board-29-07-2024-en#section2.a
+    date: 2024-07
 
 --- abstract
 
-This document describes the reservation of the "internal" top-level domain for
+This document describes the reservation of the ".internal" top-level domain for
 use in private applications.
 
 --- middle
@@ -44,40 +52,65 @@ use in private applications.
 # Introduction
 
 There are certain circumstances where private network operators may wish to use
-their own domain naming scheme that is not intended to be used or accessible by
-the broader Domain Name System, such as within closed corporate or home networks. 
+their own domain naming scheme that is not intended to be part of the global
+DNS, such as within closed corporate or home networks. 
 
-Long ago, private-use IP address ranges were set aside {{RFC1918}} for
-a similar purpose. IANA nominally acts as a steward for this address space
-which allows for individual network users to use the specified ranges for
-applications that are not intended to be globally routable.
+Private-use IP address ranges were set aside in {{RFC1918}} for a similar
+purpose. {{ICANN-Board-Resolution}} IANA nominally acts as a steward for this
+address space which allows for individual network users to use the specified
+ranges for applications that are not intended to be globally routable.
 
-The "internal" top-level domain has been reserved to provide this purpose in
-the Domain Name System. Such domains will not resolve in the global DNS, but
-can be configured within closed networks as the network operator sees fit.
+The ".internal" top-level domain has been reserved to provide a private DNS
+namespace. Domains under ".internal" will not resolve in the global DNS, but can
+be configured within closed networks as the network operator sees fit.
+
+This document assumes familiarity with DNS terms; please see [RFC9499]. 
+
+# Requirements Terminology
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when,
+and only when, they appear in all capitals, as shown here. 
 
 # Using the ".internal" Namespace
+    
+Network operators have been using different names for private-use DNS for many
+years. This usage is uncoordinated and could result in incompatibilities or
+harm to Internet users. For example, an organization might choose to use a name
+for this purpose that would later appear in the DNS root zone, thereby causing
+name collisions in the global DNS and undefined behavior for users.
 
-... best practice advice ...
+If an organization determines that they require a private-DNS namespace
+".internal" SHOULD be used for this purpose. However, the use of sub-domains of
+global DNS names is preferable whenever possible. This document does not offer
+guidance on when a network operators should choose the ".internal" namespace
+instead of a sub-domain of a global DNS name. This decision will depend on
+multiple factors such as network design and organizational needs and is outside
+the scope of this publication.
+
+The ".internal" namespace and the "alt" namespace {{RFC9476}} have been reserved for
+different purposes. ".alt" has been reserved for non-DNS contexts, whereas
+".internal is intended for use with the DNS protocol for in a private-DNS
+context. 
 
 # IANA Considerations
 
 The document requires no IANA actions.
 
-... given the birthing process, I assume there is no desire/plan for
-this to be designated as a special-use domain. If there is it requires
-standards action or IESG approval, and then it would be an IANA action
-to designate it as such.
+... According to RFC 6761 Section 4, Standards Action or IESG Approval is required
+if the domain name requires special handling. This document does not specify
+special handling  for ".internal". ...
 
 # Security Considerations
 
-While the name space is designated as for private use, there is no
+While the namespace is designated for private use, there is no
 guarantee that the names utilized in this namespace will not leak into
 the broader Internet. Such usage may include appearance in log files,
 email headers, and the like. Users, therefore, should not rely on the
 confidentiality of the namespace.
 
-Users should also not assume the appearance of such names is indicative of
+Users should also not assume the appearance of such names is indicative of 
 the true source of transmissions. When diagnosing network issues, the
 appearance of such addresses must be interpreted with the associated
 context to ascertain the private network with which the name is being used.
@@ -96,7 +129,7 @@ it is not resolvable in contexts outside of a private network.
 
 ICANN implemented the recommendation of SAC113 through a process that first
 identified an appropriate selection procedure, and then conducted a 
-selection process {{IANA-Assessment}} which determined "internal" was the
+selection process {{IANA-Assessment}} which determined ".internal" was the
 best suited string given the requirement that a single string be selected for
 this purpose. The ICANN Board of Directors subsequently adopted this
 recommendation and formally decided the reservation in July 2024.
@@ -112,4 +145,3 @@ I-D source is maintained at: https://github.com/kjd/draft-davies-internal-tld
 {:numbered="false"}
 
 TBD
-
