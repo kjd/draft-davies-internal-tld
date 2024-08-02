@@ -24,11 +24,10 @@ author:
     abbrev: ICANN
     email: andrew.mcconachie@icann.org
 informative:
+  BCP14:
+  BCP219:
   RFC1918:
-  RFC2119:
-  RFC8174:
   RFC9476:
-  RFC9499:
   SAC113:
     title: "SSAC Advisory on Private-Use TLDs"
     target: https://itp.cdn.icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/sac-113-en.pdf
@@ -55,23 +54,21 @@ There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
 the global domain name system (DNS), such as within closed corporate or home networks. 
 
-Private-use IP address ranges were set aside (e.g. {{RFC1918}}) for
-a similar purpose. IANA nominally acts as a steward for private use address space
-which allows for individual network users to use the specified ranges for
-applications that are not intended to be globally routable.
+The "internal" top-level domain is reserved to provide this purpose in the DNS.
+Such domains will not resolve in the global DNS, but can be configured within
+closed networks as the network operator sees fit.
 
-The "internal" top-level domain is reserved to provide this purpose in
-the DNS. Such domains will not resolve in the global DNS, but
-can be configured within closed networks as the network operator sees fit.
+This reservation is intended for a similar purpose that private-use IP address ranges
+that are set aside (e.g. {{RFC1918}}).
 
 # Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
-document are to be interpreted as described in BCP 14 {{RFC2119}} {{RFC8174}} when,
+document are to be interpreted as described in {{BCP14}} when,
 and only when, they appear in all capitals, as shown here. 
 
-This document assumes familiarity with DNS terms; please see [RFC9499]. 
+This document assumes familiarity with DNS terms; please see {{BCP219}}. 
 
 # Using the ".internal" Namespace
     
@@ -136,7 +133,7 @@ identified an appropriate selection procedure, and then conducted a
 selection process {{IANA-Assessment}} which determined "internal" was the
 best suited string given the requirement that a single string be selected for
 this purpose. The ICANN Board of Directors subsequently adopted this
-recommendation and formally decided the reservation in July 2024.
+recommendation and formally decided the reservation in July 2024. {{ICANN-Board-Resolution}}
 
 --- back
 
