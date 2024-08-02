@@ -93,7 +93,9 @@ context.
 
 # IANA Considerations
 
-The document requires no IANA actions.
+The document requires no IANA actions. For the reasons stated above,
+the "internal" top-level domain is reserved from being used in the global
+DNS and therefore MUST NOT appear in the DNS root zone.
 
 <!--
 ... given the birthing process, I assume there is no desire/plan for
@@ -103,7 +105,6 @@ to designate it as such.
 -->
 
 # Security Considerations
-
 
 While the namespace is designated for private use, there is no
 guarantee that the names utilized in this namespace will not leak into
