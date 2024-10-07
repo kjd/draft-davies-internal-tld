@@ -32,6 +32,9 @@ informative:
   BCP14:
   BCP219:
   RFC1918:
+  RFC6762:
+  RFC7788:
+  RFC8375:
   RFC9476:
   SAC113:
     title: "SSAC Advisory on Private-Use TLDs"
@@ -88,13 +91,21 @@ should either use sub-domains of a global DNS name that is under their organizat
 and operational control, or use the "internal" top-level domain. This document
 does not offer guidance on when a network operators should choose the "internal" 
 top-level domain instead of a sub-domain of a global DNS name. This decision will
-depend on multiple factors such as network design and organizational needs and
+depend on multiple factors such as network design or organizational needs, and
 is outside the scope of this publication.
 
-The "internal" namespace and the "alt" namespace {{RFC9476}} have been reserved for
-different purposes. "alt" has been reserved for non-DNS contexts, whereas
-"internal" is intended for use with the DNS protocol for in a private-DNS
-context. 
+# Comparisons to Similar Namespaces
+
+Other namespaces have been reserved for similar, but different purposes.
+
+The "alt" namespace {{RFC9476}} has been reserved for non-DNS contexts, whereas
+"internal" is intended for use with the DNS protocol in a private-DNS context.
+
+The "local" namespace {{RFC6762}} has been reserved for use with the multicast DNS
+protocol.
+
+The "home.arpa" namespace {{RFC7788}} {{RFC8375}} has been reserved for use with the
+Home Networking Control Protocol.
 
 # IANA Considerations
 
