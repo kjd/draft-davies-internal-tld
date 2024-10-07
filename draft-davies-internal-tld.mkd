@@ -23,11 +23,6 @@ author:
     org: Internet Corporation for Assigned Names and Numbers
     abbrev: ICANN
     email: andrew.mcconachie@icann.org
-contributor:
-  -
-    name: Paul Hoffman
-    org: ICANN
-    email: paul.hoffman@icann.org
 informative:
   BCP14:
   BCP219:
