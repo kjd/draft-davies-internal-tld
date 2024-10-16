@@ -109,7 +109,7 @@ to serve the same purpose as the "internal" domain, but operate for different us
   instead of the "internal" namespace for alternative name allocation and resolution
   technologies that do not utilize the Domain Name System but uses similar naming
   semantics and may be confusable with the global DNS.
-   
+
 * The "home.arpa" namespace {{RFC8375}} has been reserved for use
   within residential networks, including by the Home Networking Control Protocol
   {{RFC7788}}.
@@ -119,9 +119,6 @@ to serve the same purpose as the "internal" domain, but operate for different us
 The document requires no IANA actions. For the reasons stated above,
 as the "internal" top-level domain is reserved from being used in the global
 DNS it MUST NOT appear in the DNS root zone.
-
-! Editorial note: It is currently assumed this domain should NOT be designated
-as a special-use domain name at <https://www.iana.org/assignments/special-use-domain-names/>.
 
 # Security Considerations
 
@@ -160,4 +157,7 @@ recommendation and formally decided the reservation in July 2024. {{ICANN-Board-
 # Notes (for removal before publication)
 {:numbered="false"}
 
-I-D source is maintained at: https://github.com/kjd/draft-davies-internal-tld
+* It is currently assumed this domain should NOT be designated as a special-use
+domain name at <https://www.iana.org/assignments/special-use-domain-names/>.
+
+* I-D source is maintained at: https://github.com/kjd/draft-davies-internal-tld
