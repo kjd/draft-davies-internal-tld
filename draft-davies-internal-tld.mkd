@@ -90,27 +90,22 @@ is outside the scope of this publication.
 # Comparisons to Similar Namespaces
 
 Other namespaces are reserved for similar purposes, which superficially may seem
-to serve the same purpose as the "internal" domain, but operate for different use cases.
+to serve the same purpose as the "internal" domain, but are intended for different use cases.
 
-* The "local" namespace {{RFC6762}} is reserved for use the multicast DNS
-  protocol. This protocol allows for resolution between devices on a local network
-  without the need for using the DNS protocol beyond the local network. This
+* The "local" namespace {{RFC6762}} is reserved for use with the multicast DNS
+  protocol. This protocol allows for resolution between devices on a local network. This
   namespace does not use typical DNS zones for name allocation, and instead uses
   the multicast DNS protocol to negotiate names and resolve conflicts. It is expected
-  "internal" would be used for applications where names are specified in locally-configured
+  "internal" will be used for applications where names are specified in locally-configured
   zones.
 
 * The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers are
   used that may look like domain names, but do not use the DNS protocol for
   resolution. This is in contrast to the "internal" domain which is to be used with the
-  DNS protocol, but in limited private-use network scope. Use the "alt" namespace
-  instead of the "internal" namespace for alternative name allocation and resolution
-  technologies that do not utilize the DNS but uses similar naming
-  semantics and may be confusable with the global DNS.
+  DNS protocol, but in limited private-use network scope.
 
-* The "home.arpa" namespace {{RFC8375}} is reserved for use
-  within residential networks, including by the Home Networking Control Protocol
-  {{RFC7788}}.
+* The "home.arpa" namespace {{RFC8375}} is reserved for use within residential networks,
+  including the Home Networking Control Protocol {{RFC7788}}.
 
 # IANA Considerations
 
@@ -156,3 +151,4 @@ this purpose, and subsequently reserved for this purpose in July 2024. {{ICANN-B
 domain name at <https://www.iana.org/assignments/special-use-domain-names/>.
 
 * I-D source is maintained at: <https://github.com/kjd/draft-davies-internal-tld>
+
