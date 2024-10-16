@@ -57,9 +57,9 @@ There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
 the global domain name system (DNS), such as within closed corporate or home networks. 
 
-The "internal" top-level domain is reserved to provide this purpose in the DNS.
-Such domains will not resolve in the global DNS, but can be configured within
-closed networks as the network operator sees fit.
+The "internal" top-level domain provides this purpose in the DNS. Such domains
+will not resolve in the global DNS, but can be configured within closed networks
+as the network operator sees fit.
 
 This reservation is intended for a similar purpose that private-use IP address ranges
 that are set aside (e.g. {{RFC1918}}).
@@ -91,10 +91,10 @@ is outside the scope of this publication.
 
 # Comparisons to Similar Namespaces
 
-Other namespaces have been reserved for similar purposes, which superficially may seem
+Other namespaces are reserved for similar purposes, which superficially may seem
 to serve the same purpose as the "internal" domain, but operate for different use cases.
 
-* The "local" namespace {{RFC6762}} has been reserved for use the multicast DNS
+* The "local" namespace {{RFC6762}} is reserved for use the multicast DNS
   protocol. This protocol allows for resolution between devices on a local network
   without the need for using the DNS protocol beyond the local network. This
   namespace does not use typical DNS zones for name allocation, and instead uses
@@ -102,15 +102,15 @@ to serve the same purpose as the "internal" domain, but operate for different us
   "internal" would be used for applications where names are specified in locally-configured
   zones.
 
-* The "alt" namespace {{RFC9476}} has been reserved for contexts where names are used
-  that may look like domain names, but do not use the Domain Name System protocol for
+* The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers are
+  used that may look like domain names, but do not use the Domain Name System protocol for
   resolution. This is in contrast to the "internal" domain which is to be used with the
   DNS protocol, but in limited private-use network scope. Use the "alt" namespace
   instead of the "internal" namespace for alternative name allocation and resolution
   technologies that do not utilize the Domain Name System but uses similar naming
   semantics and may be confusable with the global DNS.
 
-* The "home.arpa" namespace {{RFC8375}} has been reserved for use
+* The "home.arpa" namespace {{RFC8375}} is reserved for use
   within residential networks, including by the Home Networking Control Protocol
   {{RFC7788}}.
 
@@ -145,12 +145,9 @@ the establishment of a single top-level domain for private-use applications.
 This top-level domain would not be delegated in the DNS root zone to ensure
 it is not resolvable in contexts outside of a private network.
 
-ICANN implemented the recommendation of SAC113 through a process that first
-identified an appropriate selection procedure, and then conducted a 
-selection process {{IANA-Assessment}} which determined "internal" was the
+A selection process {{IANA-Assessment}} determined "internal" was the
 best suited string given the requirement that a single string be selected for
-this purpose. The ICANN Board of Directors subsequently adopted this
-recommendation and formally decided the reservation in July 2024. {{ICANN-Board-Resolution}}
+this purpose, and subsequently reserved for this purpose in July 2024. {{ICANN-Board-Resolution}}
 
 --- back
 
