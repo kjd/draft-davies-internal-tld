@@ -59,10 +59,8 @@ the global domain name system (DNS), such as within closed corporate or home net
 
 The "internal" top-level domain provides this purpose in the DNS. Such domains
 will not resolve in the global DNS, but can be configured within closed networks
-as the network operator sees fit.
-
-This reservation is intended for a similar purpose that private-use IP address ranges
-that are set aside (e.g. {{RFC1918}}).
+as the network operator sees fit. It fulfils a similar purpose as private-use
+IP address ranges that are set aside (e.g. {{RFC1918}}).
 
 # Terminology
 
@@ -103,11 +101,11 @@ to serve the same purpose as the "internal" domain, but operate for different us
   zones.
 
 * The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers are
-  used that may look like domain names, but do not use the Domain Name System protocol for
+  used that may look like domain names, but do not use the DNS protocol for
   resolution. This is in contrast to the "internal" domain which is to be used with the
   DNS protocol, but in limited private-use network scope. Use the "alt" namespace
   instead of the "internal" namespace for alternative name allocation and resolution
-  technologies that do not utilize the Domain Name System but uses similar naming
+  technologies that do not utilize the DNS but uses similar naming
   semantics and may be confusable with the global DNS.
 
 * The "home.arpa" namespace {{RFC8375}} is reserved for use
@@ -124,9 +122,9 @@ DNS it MUST NOT appear in the DNS root zone.
 
 While the namespace is designated for private use, there is no
 guarantee that the names utilized in this namespace will not leak into
-the broader Internet. Since usage may include appearance in log files,
-email headers, and the like; users should not rely on the confidentiality
-of the "internal" namespace.
+the broader Internet. Since usage may appear in log files, email headers,
+and the like; users should not rely on the confidentiality of the
+"internal" namespace.
 
 Users should also not assume the appearance of such names is indicative of 
 the true source of transmissions. When diagnosing network issues, the
@@ -157,4 +155,4 @@ this purpose, and subsequently reserved for this purpose in July 2024. {{ICANN-B
 * It is currently assumed this domain should NOT be designated as a special-use
 domain name at <https://www.iana.org/assignments/special-use-domain-names/>.
 
-* I-D source is maintained at: https://github.com/kjd/draft-davies-internal-tld
+* I-D source is maintained at: <https://github.com/kjd/draft-davies-internal-tld>
