@@ -76,7 +76,7 @@ This document assumes familiarity with DNS terms; please see {{BCP219}}.
 # Using the ".internal" Namespace
     
 Network operators have been using different names for private-use DNS for many
-years. This usage is uncoordinated and could result in incompatibilities or
+years. This usage has been uncoordinated and can result in incompatibilities or
 harm to Internet users. For example, an organization might choose to use a name
 for this purpose that has not been assigned to them, that would later appear in
 the global DNS thereby causing name collisions and undefined behavior for users.
@@ -91,37 +91,45 @@ is outside the scope of this publication.
 
 # Comparisons to Similar Namespaces
 
-Other namespaces have been reserved for similar, but different purposes.
+Other namespaces have been reserved for similar purposes, which superficially may seem
+to serve the same purpose as the "internal" domain, but operate for different use cases.
 
-The "alt" namespace {{RFC9476}} has been reserved for non-DNS contexts, whereas
-"internal" is intended for use with the DNS protocol in a private-DNS context.
+* The "local" namespace {{RFC6762}} has been reserved for use the multicast DNS
+  protocol. This protocol allows for resolution between devices on a local network
+  without the need for using the DNS protocol beyond the local network. This
+  namespace does not use typical DNS zones for name allocation, and instead uses
+  the multicast DNS protocol to negotiate names and resolve conflicts. It is expected
+  "internal" would be used for applications where names are specified in locally-configured
+  zones.
 
-The "local" namespace {{RFC6762}} has been reserved for use with the multicast DNS
-protocol.
-
-The "home.arpa" namespace {{RFC7788}} {{RFC8375}} has been reserved for use with the
-Home Networking Control Protocol.
+* The "alt" namespace {{RFC9476}} has been reserved for contexts where names are used
+  that may look like domain names, but do not use the Domain Name System protocol for
+  resolution. This is in contrast to the "internal" domain which is to be used with the
+  DNS protocol, but in limited private-use network scope. Use the "alt" namespace
+  instead of the "internal" namespace for alternative name allocation and resolution
+  technologies that do not utilize the Domain Name System but uses similar naming
+  semantics and may be confusable with the global DNS.
+   
+* The "home.arpa" namespace {{RFC8375}} has been reserved for use
+  within residential networks, including by the Home Networking Control Protocol
+  {{RFC7788}}.
 
 # IANA Considerations
 
 The document requires no IANA actions. For the reasons stated above,
-the "internal" top-level domain is reserved from being used in the global
-DNS and therefore MUST NOT appear in the DNS root zone.
+as the "internal" top-level domain is reserved from being used in the global
+DNS it MUST NOT appear in the DNS root zone.
 
-<!--
-... given the birthing process, I assume there is no desire/plan for
-this to be designated as a special-use domain. If there is it requires
-standards action or IESG approval, and then it would be an IANA action
-to designate it as such.
--->
+! Editorial note: It is currently assumed this domain should NOT be designated
+as a special-use domain name at <https://www.iana.org/assignments/special-use-domain-names/>.
 
 # Security Considerations
 
 While the namespace is designated for private use, there is no
 guarantee that the names utilized in this namespace will not leak into
-the broader Internet. Such usage may include appearance in log files,
-email headers, and the like. Users, therefore, should not rely on the
-confidentiality of the "internal" namespace.
+the broader Internet. Since usage may include appearance in log files,
+email headers, and the like; users should not rely on the confidentiality
+of the "internal" namespace.
 
 Users should also not assume the appearance of such names is indicative of 
 the true source of transmissions. When diagnosing network issues, the
@@ -129,7 +137,7 @@ appearance of such addresses must be interpreted with the associated
 context to ascertain the private network with which the name is being used.
 A private-use name can never be used by itself to identify the origin of
 a communication. It is entirely likely that many of the same names will be
-used for entirely differnet purposes on different networks connected to
+used for entirely different purposes on different networks connected to
 the Internet.
 
 # Additional Information
@@ -153,8 +161,3 @@ recommendation and formally decided the reservation in July 2024. {{ICANN-Board-
 {:numbered="false"}
 
 I-D source is maintained at: https://github.com/kjd/draft-davies-internal-tld
-
-# Acknowledgments
-{:numbered="false"}
-
-TBD
