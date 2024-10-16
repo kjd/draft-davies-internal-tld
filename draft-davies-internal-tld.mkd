@@ -46,7 +46,7 @@ informative:
 
 --- abstract
 
-This document describes the reservation of the ".internal" top-level domain for
+This document describes the ".internal" top-level domain for
 use in private applications.
 
 --- middle
