@@ -87,6 +87,12 @@ top-level domain instead of a sub-domain of a global DNS name. This decision wil
 depend on multiple factors such as network design or organizational needs, and
 is outside the scope of this publication.
 
+DNSSEC validating resolvers configured with the IANA DNSSEC KSK will always fail to
+resolve names ending in "internal". An organization wanting to use such names inside
+of their organization MAY want to sign and validate names ending in "internal"
+within their organization. The details of such configuration are outside the scope of
+this document.
+
 # Comparisons to Similar Namespaces
 
 Other namespaces are reserved for similar purposes, which superficially may seem
