@@ -55,13 +55,15 @@ use in private applications.
 
 There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
-the global domain name system (DNS), such as within closed corporate or home networks.
+the global domain name system (DNS), such as within closed corporate or home
+networks.
 
 The "internal" top-level domain provides this purpose in the DNS. Such domains
 will not resolve in the global DNS, but can be configured within closed networks
 as the network operator sees fit.
 
-The "internal" top-level domain is intened to fulfil a similar purpose to the IP address ranges that are set aside for private-use (e.g. {{RFC1918}}).
+The "internal" top-level domain is intend to fulfil a similar purpose to the IP
+address ranges that are set aside for private-use (e.g. {{RFC1918}}).
 
 # Terminology
 
@@ -96,8 +98,9 @@ details of such a configuration are outside the scope of this document.
 
 # Comparisons to Similar Namespaces
 
-Other namespaces are reserved for similar purposes, which superficially may seem
-to serve the same purpose as the "internal" domain, but are intended for different use cases.
+Other namespaces are reserved for similar purposes, which superficially may
+seem to serve the same purpose as the "internal" domain, but are intended for
+different use cases.
 
 * The "local" namespace {{RFC6762}} is reserved for use with the multicast DNS
   protocol. This protocol allows for resolution between devices on a local
@@ -128,14 +131,46 @@ the broader Internet. Since usage may appear in log files, email headers,
 and the like; users should not rely on the confidentiality of the
 "internal" namespace.
 
-Users should also not assume the appearance of such names is indicative of
-the true source of transmissions. When diagnosing network issues, the
-appearance of such addresses must be interpreted with the associated
-context to ascertain the private network with which the name is being used.
-A private-use name can never be used by itself to identify the origin of
-a communication. It is entirely likely that many of the same names will be
-used for entirely different purposes on different networks connected to
-the Internet.
+As the "internal" namespace is not resolvable in the global DNS, it is not
+anticipated that Certificate Authorities will issue certificates for names
+ending in ".internal". If an organization wants to use HTTPS with names ending
+in ".internal", they will need to use a private CA.
+
+Users should not expect that names ending in ".internal" are globally unique;
+it is likely that many of the same names will be used for entirely different
+purposes on different networks. This is similar to the use of ".local" in the
+multicast DNS protocol - just as there are many different devices named
+"printer.local", there may be many different servers named
+"accounting.internal". Users should be aware of this when entering credentials.
+In addition, when diagnosing network issues, the appearance of such addresses
+must be interpreted with the associated context to ascertain the private
+network with which the name is being used.
+
+The lack of global uniqueness also has implications for HTTP cookies; a cookie
+set for "accounting.internal" on one network may be sent to a different
+"accounting.internal" (for example, if a user moves their laptop from one
+network using ".internal" to another network using ".internal"). This may be
+mitigated by adding the Secure flag to the cookie, but this requires that all
+users accessing the site have the required private CA installed and trusted on
+their device.
+
+(Ed note (WK): ... and that they don't also have a private trust
+anchor for the overlapping name on the other network that they join. This is
+really tricky to explain in an understandable way, and I think that it's enough
+of a corner case that I don't think it's worth trying to explain in this
+document. Then again, the Security Considerations sections are often
+complicated, so perhaps it is?)
+
+Users should also not assume the appearance of such names is indicative of the
+true source of transmissions. When diagnosing network issues, the appearance of
+such addresses must be interpreted with the associated context to ascertain the
+private network with which the name is being used. A private-use name can never
+be used by itself to identify the origin of a communication. It is entirely
+likely that many of the same names will be used for entirely different purposes
+on different networks connected to the Internet.
+
+(Ed note (WK): This is similar to my "don't assume uniqueness" above. I stole
+some of this text and reworded it, but am not sure that I captured all of it)
 
 # Additional Information
 
