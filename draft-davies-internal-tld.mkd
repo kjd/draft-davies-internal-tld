@@ -6,7 +6,7 @@ stand_alone: true
 stream: independent
 ipr: trust200902
 kw: Internet-Draft
-cat: info 
+cat: info
 pi:
   sortrefs: yes
   symrefs: yes
@@ -55,7 +55,7 @@ use in private applications.
 
 There are certain circumstances where private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
-the global domain name system (DNS), such as within closed corporate or home networks. 
+the global domain name system (DNS), such as within closed corporate or home networks.
 
 The "internal" top-level domain provides this purpose in the DNS. Such domains
 will not resolve in the global DNS, but can be configured within closed networks
@@ -67,12 +67,12 @@ IP address ranges that are set aside (e.g. {{RFC1918}}).
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
 document are to be interpreted as described in {{BCP14}} when,
-and only when, they appear in all capitals, as shown here. 
+and only when, they appear in all capitals, as shown here.
 
-This document assumes familiarity with DNS terms; please see {{BCP219}}. 
+This document assumes familiarity with DNS terms; please see {{BCP219}}.
 
 # Using the ".internal" Namespace
-    
+
 Network operators have been using different names for private-use DNS for many
 years. This usage has been uncoordinated and can result in incompatibilities or
 harm to Internet users. For example, an organization might choose to use a name
@@ -82,7 +82,7 @@ the global DNS thereby causing name collisions and undefined behavior for users.
 If an organization determines that they require a private-use DNS namespace, they
 should either use sub-domains of a global DNS name that is under their organizational
 and operational control, or use the "internal" top-level domain. This document
-does not offer guidance on when a network operators should choose the "internal" 
+does not offer guidance on when a network operators should choose the "internal"
 top-level domain instead of a sub-domain of a global DNS name. This decision will
 depend on multiple factors such as network design or organizational needs, and
 is outside the scope of this publication.
@@ -119,6 +119,75 @@ The document requires no IANA actions. For the reasons stated above,
 as the "internal" top-level domain is reserved from being used in the global
 DNS it MUST NOT appear in the DNS root zone.
 
+## Domain Name Reservation Considerations
+
+{ Edit note (WK): This is my proposed answers for the "Seven Questions" from
+[RFC6761 - "Special-Use Domain Names"](https://datatracker.ietf.org/doc/rfc6761/). I have put them here for review and discussion, *if* it is decided that .internal qualifies as a special-use domain name. }
+
+**Note**:
+
+  * Answer 1: lifted [RFC6762 - "Multicast DNS"](https://datatracker.ietf.org/doc/rfc6762/).
+    * I added an initial sentence to make it even more explicit.
+  * Answer 2: lifted from [RFC6761 - "Special-Use Domain
+    Names"](https://datatracker.ietf.org/doc/rfc6761/), Sec 6.5.  "Domain Name Reservation Considerations for Example Domains".
+    * I added text about potential special handling for cookies.
+  * Answers 3 and 4: lifted from [RFC6761 - "Special-Use Domain
+    Names"](https://datatracker.ietf.org/doc/rfc6761/), Sec 6.5.  "Domain Name Reservation Considerations for Example Domains".
+  * Answers 5 and 6: lifted from [RFC6761 - "Special-Use Domain
+    Names"](https://datatracker.ietf.org/doc/rfc6761/), Sec 6.1 "Domain Name Reservation Considerations for Private Addresses".
+  * Answer 7: lifted from [RFC6762 - "Multicast DNS"](https://datatracker.ietf.org/doc/rfc6762/).
+
+
+  1. Users SHOULD understand that .internal names are not expected to be globally
+   unique, and may resolve to different addresses and services on different
+   networks. Since there is no central authority responsible for assigning
+   .internal names, users SHOULD be aware of this and SHOULD exercise
+   appropriate caution.  In an untrusted or unfamiliar network environment,
+   users SHOULD be aware that using a name like "www.internal" may not actually
+   connect them to the web site they expected, and could easily connect them to
+   a different web page, or even a fake or spoof of their intended web site,
+   designed to trick them into revealing confidential information.  As always
+   with networking, end-to-end cryptographic security can be a useful tool.
+   For example, when connecting with ssh, the ssh host key verification process
+   will inform the user if it detects that the identity of the entity they are
+   communicating with has changed since the last time they connected to that
+   name.
+
+
+   1. Application software, in general, SHOULD NOT recognize .internal names as
+special and SHOULD use .internal names as they would other domain names. An
+exception to this may be web browsers (and similar) which may wish to institute
+special handling for cookies, such as invalidation when a network change is
+detected.
+
+
+  1. Name resolution APIs and libraries SHOULD NOT recognize .internal names as
+special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
+send queries for .internal names to their configured caching DNS server(s).
+
+
+  1. Caching DNS servers SHOULD NOT recognize .internal names as special and
+SHOULD resolve them normally.
+
+
+  1. Authoritative DNS servers SHOULD recognize these names as special and
+SHOULD, by default, generate immediate negative responses for all such queries,
+unless explicitly configured by the administrator to give positive answers for
+names within the .internal zone.
+
+
+  1. DNS server operators SHOULD, if they are using .internal names, configure
+   their authoritative DNS servers to act as authoritative for these names.
+
+
+  1. DNS Registries/Registrars MUST NOT grant requests to register any of these
+   names in the normal way to any person or entity.  These names are reserved
+   for use in private networks, and fall outside the set of names available for
+   allocation by registries/ registrars.  Attempting to allocate one of these
+   names as if it were a normal DNS domain name will probably not work as
+   desired, for reasons 4, 5 and 6 above.
+
+
 # Security Considerations
 
 While the namespace is designated for private use, there is no
@@ -127,7 +196,7 @@ the broader Internet. Since usage may appear in log files, email headers,
 and the like; users should not rely on the confidentiality of the
 "internal" namespace.
 
-Users should also not assume the appearance of such names is indicative of 
+Users should also not assume the appearance of such names is indicative of
 the true source of transmissions. When diagnosing network issues, the
 appearance of such addresses must be interpreted with the associated
 context to ascertain the private network with which the name is being used.
