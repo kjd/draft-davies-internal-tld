@@ -61,7 +61,7 @@ The "internal" top-level domain provides this purpose in the DNS. Such domains
 will not resolve in the global DNS, but can be configured within closed networks
 as the network operator sees fit.
 
-The "internal" top-level domain is intened to fulfil a similar purpose to the IP address ranges that are set aside for private-use (e.g. {{RFC1918}}).
+The "internal" top-level domain is intended to fulfil a similar purpose to the IP address ranges that are set aside for private-use (e.g. {{RFC1918}}).
 
 # Terminology
 
