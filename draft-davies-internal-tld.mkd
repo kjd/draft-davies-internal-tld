@@ -53,17 +53,17 @@ use in private applications.
 
 # Introduction
 
-There are certain circumstances where private network operators may wish to use
+There are certain circumstances in which private network operators may wish to use
 their own domain naming scheme that is not intended to be used or accessible by
 the global domain name system (DNS), such as within closed corporate or home
 networks.
 
-The "internal" top-level domain provides this purpose in the DNS. Such domains
+The "internal" top-level domain enables this purpose in the DNS. Such domains
 will not resolve in the global DNS, but can be configured within closed networks
 as the network operator sees fit.
 
-The "internal" top-level domain is intend to fulfil a similar purpose to the IP
-address ranges that are set aside for private-use (e.g. {{RFC1918}}).
+The "internal" top-level domain is intended to fulfil a similar purpose to the
+IP address ranges that are set aside for private-use (e.g. {{RFC1918}}).
 
 # Terminology
 
@@ -79,11 +79,11 @@ This document assumes familiarity with DNS terms; please see {{BCP219}}.
 Network operators have been using different names for private-use DNS for many
 years. This uncoordinated usage can result in incompatibilities or harm to
 Internet users. For example, an organization might choose to use a name for
-this purpose that has not been assigned to them, which may later appear in the
-global DNS, thereby causing name collisions and undefined behavior for users.
+this purpose that has not been assigned to them. If this later appears in the
+global DNS, it will cause name collisions and undefined behavior for users.
 
-If an organization determines that they require a private-use DNS namespace,
-they should either use sub-domains of a global DNS name that is under their
+If an organization determines that it requires a private-use DNS namespace,
+it should either use sub-domains of a global DNS name that is under its
 organizational and operational control, or use the "internal" top-level domain.
 This document does not offer guidance on when a network operator should choose
 the "internal" top-level domain instead of a sub-domain of a global DNS name.
@@ -106,7 +106,7 @@ different use cases.
   protocol. This protocol allows for resolution between devices on a local
   network. This namespace does not use typical DNS zones for name allocation,
   and instead uses the multicast DNS protocol to negotiate names and resolve
-  conflicts. It is expected "internal" will be used for applications where
+  conflicts. It is expected ".internal" will be used for applications where
   names are specified in locally-configured zones.
 
 * The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers
@@ -121,7 +121,7 @@ different use cases.
 
 The document requires no IANA actions. For the reasons stated above,
 as the "internal" top-level domain is reserved from being used in the global
-DNS it MUST NOT appear in the DNS root zone.
+DNS, and MUST NOT appear in the DNS root zone.
 
 # Security Considerations
 
@@ -134,7 +134,7 @@ and the like; users should not rely on the confidentiality of the
 As the "internal" namespace is not resolvable in the global DNS, it is not
 anticipated that Certificate Authorities will issue certificates for names
 ending in ".internal". If an organization wants to use HTTPS with names ending
-in ".internal", they will need to use a private CA.
+in ".internal", they will need to use an internal, private CA.
 
 Users should not expect that names ending in ".internal" are globally unique;
 it is likely that many of the same names will be used for entirely different
