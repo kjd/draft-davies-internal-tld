@@ -32,6 +32,7 @@ informative:
   BCP14:
   BCP219:
   RFC1918:
+  RFC6761:
   RFC6762:
   RFC7788:
   RFC8375:
