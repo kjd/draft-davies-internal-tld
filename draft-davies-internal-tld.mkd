@@ -80,7 +80,7 @@ here.
 
 This document assumes familiarity with DNS terms; please see {{BCP219}}. 
 
-# Using the ".internal" Namespace
+# Using the "internal" Namespace
     
 Network operators have been using different names for private-use
 DNS for many years. This usage has been uncoordinated and can result
@@ -132,7 +132,9 @@ intended for different use cases.
 
 The document requires no IANA actions. For the reasons stated above,
 as the "internal" top-level domain is reserved from being used in the
-global DNS it MUST NOT appear in the DNS root zone.
+global DNS it MUST NOT appear in the DNS root zone except to the
+minimum extent necessary to enable it to function for its intended
+purpose.
 
 ## Domain Name Reservation Considerations
 
