@@ -212,34 +212,31 @@ Internet. Since usage may appear in log files, email headers, and the
 like; users should not rely on the confidentiality of the "internal"
 namespace.
 
-Users should not expect that names ending in ".internal" are globally
-unique; it is likely that many of the same names will be used for
-entirely different purposes on different networks. This is similar
-to the use of ".local" in the multicast DNS protocol - just as there
-are many different devices named "printer.local", there may be many
-different servers named "accounting.internal". Users should be aware of
-this when entering credentials.
+Users should not expect that names in the "internal" namespace are
+globally unique; it is assumed that many of the same names will be used
+for entirely different purposes on different networks. This is similar
+to the use of the "local" namespace in the multicast DNS protocol - just
+as there are many different devices named "printer.local", there may
+be many different servers named "accounting.internal". Users should be
+aware of this when performing operations requiring authenticity, such as
+entering credentials.
 
 Users should also not assume the appearance of such names is indicative
 of the true source of transmissions. When diagnosing network issues, the
 appearance of such addresses must be interpreted with the associated
 context to ascertain the private network with which the name is being
 used. A private-use name can never be used by itself to identify the
-origin of a communication. It is entirely likely that many of the same
-names will be used for entirely different purposes on different networks
-connected to the Internet.
+origin of a communication.
 
 The lack of global uniqueness also has implications for HTTP cookies;
-a cookie set for "accounting.internal" on one network may be sent to
-a different "accounting.internal" (for example, if a user moves their
-laptop from one network using ".internal" to another network using
-".internal"). This may be mitigated by adding the Secure flag to the
-cookie. As the "internal" namespace is not resolvable in the global
-DNS, it is anticipated that Certificate Authorities will not issue
-certificates for names ending in ".internal". If an organization wants
-to use HTTPS with names ending in ".internal", they will need to use an
-internal, private CA. The details of this are outside the scope of this
-document.
+a cookie set for "accounting.internal" on one network may be sent to a
+different "accounting.internal" if the user changes their local network.
+This may be mitigated by adding the Secure flag to the cookie. It is
+expected that Certificate Authorities will not issue certificates for
+the "internal" namspace as it does not resolve in the global DNS. If an
+organization wants to use HTTP over TLS with names in the "internal"
+namespace, they will also need an internal, private CA. The details of
+this are outside the scope of this document.
 
 # Additional Information
 
