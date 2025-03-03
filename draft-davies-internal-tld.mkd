@@ -135,22 +135,20 @@ purpose.
 
 ## Domain Name Reservation Considerations
 
-(Editor note (WK): It not yet decided if .internal should
+(Editor note: It not yet decided if the "internal" top-level domain should
 be added to the list of special-use domain names at
-<https://www.iana.org/assignments/special-use-domain-names/>.
-
-Below are potential answers for the "Seven Questions" from {{RFC6761}}, to help
-drive this discussion, and are likely to change before publication.
-
-As suggested by Petr, these answers were lifted from {{RFC6761}}, Section 6.1.
+<https://www.iana.org/assignments/special-use-domain-names/>. These are
+potential answers for the "Seven Questions" from {{RFC6761}}, to help
+drive this discussion, and are likely to change before publication. As
+suggested by Petr, these answers were lifted from {{RFC6761}}, Section 6.1.
 - "Domain Name Reservation Considerations for Private Addresses" with minor
 edits to e.g replace "private addresses" with "internal names". The answer to
 question 5 was also rewritten.)
 
-1. Users are free to use these names within .internal as they would any other
-  domain names.  However, since there is no central authority responsible for
-  use of these names, users should be aware that these names are likely to
-  yield different results on different networks
+1. Users are free to use these names within the "internal" top-level domain
+  as they would any other domain names.  However, since there is no central
+  authority responsible for use of these names, users should be aware that
+  these names are likely to yield different results on different networks.
 
 1. Application software SHOULD NOT recognize these names as special, and SHOULD
    use these names as they would other domain names
@@ -166,22 +164,23 @@ question 5 was also rewritten.)
   negative) responses for all such queries.  This is to avoid unnecessary load
   on the root name servers and other name servers.  Caching DNS servers SHOULD
   offer a configuration option (disabled by default) to enable upstream
-  resolution of such names, for use in private networks where .internal names
-  are known to be handled by an authoritative DNS server in that private
+  resolution of such names, for use in private networks where names ending in
+  ".internal" are known to be handled by an authoritative DNS server in that private
   network.
 
 1. Authoritative DNS servers SHOULD NOT recognize these names as special unless
-   explicitly configured by the administrator for .internal names.
+   explicitly configured by the administrator for names within the
+   "internal" namespace.
 
-1. DNS server operators SHOULD, if they are using names within .internal,
-  configure their authoritative DNS servers to act as authoritative for these
-  names.
+1. DNS server operators SHOULD, if they are using names within the "internal"
+  top-level domain, configure their authoritative DNS servers to act as
+  authoritative for these names.
 
 1. DNS Registries/Registrars MUST NOT grant requests to register any of these
-names. These names are reserved for use in private networks, and fall outside
-the set of names available for allocation by registries/registrars. Attempting
-to allocate one of these names in the global DNS name will probably not work as
-desired, for reasons 4, 5 and 6 above.
+  names. These names are reserved for use in private networks, and fall outside
+  the set of names available for allocation by registries/registrars. Attempting
+  to allocate one of these names in the global DNS name will probably not work as
+  desired, for reasons 4, 5 and 6 above.
 
 # Security Considerations
 
@@ -204,8 +203,8 @@ Users should also not assume the appearance of such names is indicative
 of the true source of transmissions. When diagnosing network issues, the
 appearance of such addresses must be interpreted with the associated
 context to ascertain the private network with which the name is being
-used. A private-use name can never be used by itself to identify the
-origin of a communication.
+used. A name within the "internal" namespace can never be used by itself
+to identify the origin of a communication.
 
 The lack of global uniqueness also has implications for HTTP cookies;
 a cookie set for "accounting.internal" on one network may be sent to a
