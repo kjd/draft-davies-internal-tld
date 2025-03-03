@@ -6,7 +6,7 @@ stand_alone: true
 stream: independent
 ipr: trust200902
 kw: Internet-Draft
-cat: info 
+cat: info
 pi:
   sortrefs: yes
   symrefs: yes
@@ -78,10 +78,10 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
 {{BCP14}} when, and only when, they appear in all capitals, as shown
 here.
 
-This document assumes familiarity with DNS terms; please see {{BCP219}}. 
+This document assumes familiarity with DNS terms; please see {{BCP219}}.
 
 # Using the "internal" Namespace
-    
+
 Network operators have been using different names for private-use
 DNS for many years. This usage has been uncoordinated and can result
 in incompatibilities or harm to Internet users. For example, an
@@ -98,11 +98,8 @@ of a sub-domain of a global DNS name. This decision will depend on
 multiple factors such as network design or organizational needs, and is
 outside the scope of this publication.
 
-DNSSEC validating resolvers will always fail to resolve names ending in
-"internal". An organization wanting to use such names inside of their
-organization MAY want to sign and validate names ending in "internal"
-within their organization. The details of such configuration are outside
-the scope of this document.
+DNSSEC validating resolvers will fail to resolve names ending in
+"internal".
 
 # Comparisons to Similar Namespaces
 
@@ -142,69 +139,49 @@ purpose.
 be added to the list of special-use domain names at
 <https://www.iana.org/assignments/special-use-domain-names/>.
 
-Below are potential answers for the "Seven Questions" from {{RFC6761}},
-to help drive this discussion.
+Below are potential answers for the "Seven Questions" from {{RFC6761}}, to help
+drive this discussion, and are likely to change before publication.
 
-These answers were lifted from other documents which made similar
-reservations, because “Good artists copy; great artists steal.” --
-Pablo Picasso)
+As suggested by Petr, these answers were lifted from {{RFC6761}}, Section 6.1.
+- "Domain Name Reservation Considerations for Private Addresses" with minor
+edits to e.g replace "private addresses" with "internal names". The answer to
+question 5 was also rewritten.)
 
-  * Answer 1: copied from {{RFC6762}}. Additional sentence added to make it more
-    explicit.
-  * Answer 2: copied from {{RFC6761}}, Sec 6.5.  "Domain Name Reservation
-    Considerations for Example Domains". Additional text about potential
-    special handling for cookies.
-  * Answers 3 and 4: copied from {{RFC6761}}, Sec 6.5.  "Domain Name Reservation
-    Considerations for Example Domains".
-  * Answers 5 and 6: copied from {{RFC6761}}, Sec 6.1 "Domain Name Reservation
-    Considerations for Private Addresses".
-  * Answer 7: copied from {{RFC6762}}.
+1. Users are free to use these names within .internal as they would any other
+  domain names.  However, since there is no central authority responsible for
+  use of these names, users should be aware that these names are likely to
+  yield different results on different networks
 
-    1. Users SHOULD understand that .internal names are not expected
-   to be globally unique, and may resolve to different addresses and
-   services on different networks. Since there is no central authority
-   responsible for assigning .internal names, users SHOULD be aware of
-   this and SHOULD exercise appropriate caution.  In an untrusted or
-   unfamiliar network environment, users SHOULD be aware that using a
-   name like "www.internal" may not actually connect them to the web
-   site they expected, and could easily connect them to a different web
-   page, or even a fake or spoof of their intended web site, designed to
-   trick them into revealing confidential information.  As always with
-   networking, end-to-end cryptographic security can be a useful tool.
-   For example, when connecting with ssh, the ssh host key verification
-   process will inform the user if it detects that the identity of the
-   entity they are communicating with has changed since the last time
-   they connected to that name.
+1. Application software SHOULD NOT recognize these names as special, and SHOULD
+   use these names as they would other domain names
 
-    1. Application software, in general, SHOULD NOT recognize .internal
-   names as special and SHOULD use .internal names as they would other
-   domain names. An exception to this may be web browsers (and similar)
-   which may wish to institute special handling for cookies, such as
-   invalidation when a network change is detected.
+1. Name resolution APIs and libraries SHOULD NOT recognize these names as
+  special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
+  send queries for these names to their configured caching DNS server(s).
 
-    1. Name resolution APIs and libraries SHOULD NOT recognize .internal
-   names as special and SHOULD NOT treat them differently.  Name
-   resolution APIs SHOULD send queries for .internal names to their
-   configured caching DNS server(s).
+1. Caching DNS servers SHOULD recognize these names as special and SHOULD NOT,
+  by default, attempt to look up NS records for them, or otherwise query
+  authoritative DNS servers in an attempt to resolve these names.  Instead,
+  caching DNS servers SHOULD, by default, generate immediate (positive or
+  negative) responses for all such queries.  This is to avoid unnecessary load
+  on the root name servers and other name servers.  Caching DNS servers SHOULD
+  offer a configuration option (disabled by default) to enable upstream
+  resolution of such names, for use in private networks where .internal names
+  are known to be handled by an authoritative DNS server in that private
+  network.
 
-    1. Caching DNS servers SHOULD NOT recognize .internal names as
-   special and SHOULD resolve them normally.
+1. Authoritative DNS servers SHOULD NOT recognize these names as special unless
+   explicitly configured by the administrator for .internal names.
 
-    1. Authoritative DNS servers SHOULD recognize these names as special
-   and SHOULD, by default, generate immediate negative responses for all
-   such queries, unless explicitly configured by the administrator to
-   give positive answers for names within the .internal zone.
+1. DNS server operators SHOULD, if they are using names within .internal,
+  configure their authoritative DNS servers to act as authoritative for these
+  names.
 
-    1. DNS server operators SHOULD, if they are using .internal names,
-   configure their authoritative DNS servers to act as authoritative for
-   these names.
-
-    1. DNS Registries/Registrars MUST NOT grant requests to register any
-   of these names in the normal way to any person or entity. These names
-   are reserved for use in private networks, and fall outside the set of
-   names available for allocation by registries/ registrars. Attempting
-   to allocate one of these names as if it were a normal DNS domain name
-   will probably not work as desired, for reasons 4, 5 and 6 above.
+1. DNS Registries/Registrars MUST NOT grant requests to register any of these
+names. These names are reserved for use in private networks, and fall outside
+the set of names available for allocation by registries/registrars. Attempting
+to allocate one of these names in the global DNS name will probably not work as
+desired, for reasons 4, 5 and 6 above.
 
 # Security Considerations
 
@@ -259,9 +236,4 @@ July 2024. {{ICANN-Board-Resolution}}
 # Notes (for removal before publication)
 {:numbered="false"}
 
-* It is currently assumed this domain should NOT
-be designated as a special-use domain name at
-<https://www.iana.org/assignments/special-use-domain-names/>.
-
 * I-D source is maintained at: <https://github.com/kjd/draft-davies-internal-tld>
-
