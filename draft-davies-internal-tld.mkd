@@ -98,8 +98,8 @@ of a sub-domain of a global DNS name. This decision will depend on
 multiple factors such as network design or organizational needs, and is
 outside the scope of this publication.
 
-DNSSEC validating resolvers will fail to resolve names ending in
-"internal".
+DNSSEC validating resolvers relying on the global DNS trust anchor will
+fail to resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
@@ -129,58 +129,7 @@ intended for different use cases.
 
 The document requires no IANA actions. For the reasons stated above,
 as the "internal" top-level domain is reserved from being used in the
-global DNS it MUST NOT appear in the DNS root zone except to the
-minimum extent necessary to enable it to function for its intended
-purpose.
-
-## Domain Name Reservation Considerations
-
-(Editor note: It not yet decided if the "internal" top-level domain should
-be added to the list of special-use domain names at
-<https://www.iana.org/assignments/special-use-domain-names/>. These are
-potential answers for the "Seven Questions" from {{RFC6761}}, to help
-drive this discussion, and are likely to change before publication. As
-suggested by Petr, these answers were lifted from {{RFC6761}}, Section 6.1.
-- "Domain Name Reservation Considerations for Private Addresses" with minor
-edits to e.g replace "private addresses" with "internal names". The answer to
-question 5 was also rewritten.)
-
-1. Users are free to use these names within the "internal" top-level domain
-  as they would any other domain names.  However, since there is no central
-  authority responsible for use of these names, users should be aware that
-  these names are likely to yield different results on different networks.
-
-1. Application software SHOULD NOT recognize these names as special, and SHOULD
-   use these names as they would other domain names
-
-1. Name resolution APIs and libraries SHOULD NOT recognize these names as
-  special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
-  send queries for these names to their configured caching DNS server(s).
-
-1. Caching DNS servers SHOULD recognize these names as special and SHOULD NOT,
-  by default, attempt to look up NS records for them, or otherwise query
-  authoritative DNS servers in an attempt to resolve these names.  Instead,
-  caching DNS servers SHOULD, by default, generate immediate (positive or
-  negative) responses for all such queries.  This is to avoid unnecessary load
-  on the root name servers and other name servers.  Caching DNS servers SHOULD
-  offer a configuration option (disabled by default) to enable upstream
-  resolution of such names, for use in private networks where names ending in
-  ".internal" are known to be handled by an authoritative DNS server in that private
-  network.
-
-1. Authoritative DNS servers SHOULD NOT recognize these names as special unless
-   explicitly configured by the administrator for names within the
-   "internal" namespace.
-
-1. DNS server operators SHOULD, if they are using names within the "internal"
-  top-level domain, configure their authoritative DNS servers to act as
-  authoritative for these names.
-
-1. DNS Registries/Registrars MUST NOT grant requests to register any of these
-  names. These names are reserved for use in private networks, and fall outside
-  the set of names available for allocation by registries/registrars. Attempting
-  to allocate one of these names in the global DNS name will probably not work as
-  desired, for reasons 4, 5 and 6 above.
+global DNS.
 
 # Security Considerations
 
@@ -211,7 +160,7 @@ a cookie set for "accounting.internal" on one network may be sent to a
 different "accounting.internal" if the user changes their local network.
 This may be mitigated by adding the Secure flag to the cookie. It is
 expected that Certificate Authorities will not issue certificates for
-the "internal" namspace as it does not resolve in the global DNS. If an
+the "internal" namespace as it does not resolve in the global DNS. If an
 organization wants to use HTTP over TLS with names in the "internal"
 namespace, they will also need an internal, private CA. The details of
 this are outside the scope of this document.
@@ -221,9 +170,8 @@ this are outside the scope of this document.
 This reservation is the result of a community deliberation on this
 topic over many years, most notably {{SAC113}}. The SAC113 advisory
 recommended the establishment of a single top-level domain for
-private-use applications. This top-level domain would not be delegated
-in the DNS root zone to ensure it is not resolvable in contexts outside
-of a private network.
+private-use applications. DNS records within this top-level domain
+will not be resolvable in contexts outside of a private network.
 
 A selection process {{IANA-Assessment}} determined "internal" was
 the best suited string given the requirement that a single string be
