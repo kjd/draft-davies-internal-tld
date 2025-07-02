@@ -29,8 +29,6 @@ author:
     org: Google
     email: warren@kumari.net
 informative:
-  BCP14:
-  BCP219:
   RFC1918:
   RFC6761:
   RFC6762:
@@ -69,16 +67,6 @@ domains will not resolve in the global DNS, but can be configured within
 closed networks as the network operator sees fit. It fulfils a similar
 purpose as private-use IP address ranges that are set aside (e.g.
 {{RFC1918}}).
-
-# Terminology
-
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-"SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-"OPTIONAL" in this document are to be interpreted as described in
-{{BCP14}} when, and only when, they appear in all capitals, as shown
-here.
-
-This document assumes familiarity with DNS terms; please see {{BCP219}}.
 
 # Using the "internal" Namespace
 
@@ -122,13 +110,13 @@ intended for different use cases.
   private-use network scope.
 
 * The "home.arpa" namespace {{RFC8375}} is reserved for use within
-  residential networks, including the Home Networking Control Protocol
+  residential networks, including with the Home Networking Control Protocol
   {{RFC7788}}.
 
 # IANA Considerations
 
 The document requires no IANA actions. For the reasons stated above,
-as the "internal" top-level domain is reserved from being used in the
+the "internal" top-level domain is reserved from being used in the
 global DNS.
 
 # Security Considerations
