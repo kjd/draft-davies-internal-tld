@@ -82,8 +82,7 @@ potential for confusion that may arise from the use of private-use namespaces.
 However, in some cases, such as for isolated networks that will never be
 connected to the global Internet, use of the "internal" top-level domain may be
 appropriate. Entities choosing to do so should be cognizant of the implications
-of this decision, including the potential for collisions if multiple networks
-this decision, including:
+of this decision, including:
 1. The potential for collisions if multiple networks using "internal" are
    interconnected in the future
 2. The risk of leakage of "internal" names into the global DNS, and t
@@ -139,7 +138,7 @@ be many different servers named "accounting.internal". Users should be
 aware of this when performing operations requiring authenticity, such as
 entering credentials.
 
-Related to the lack of uniqueness, users should should be aware that collisions
+Related to the lack of uniqueness, users should be aware that collisions
 may occur if the same name is used in different "internal" networks, for
 example if two organizations using "internal" interconnect their networks. This
 is similar to the potential for IP address collisions when interconnecting
