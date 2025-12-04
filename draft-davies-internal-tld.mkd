@@ -73,7 +73,7 @@ Network operators have been using various,unregistered names for private-use
 DNS for many years. This usage has been uncoordinated and can result
 in incompatibilities or harm to Internet users. For example, an
 organization might choose to use a name for this purpose that has not
-been assigned to them. This name could later appears in the global DNS, thereby
+been assigned to them. This name could later appear in the global DNS, thereby
 causing name collisions and undefined behavior for users.
 
 In almost all cases, an entity should use a sub-domain of a global DNS name
