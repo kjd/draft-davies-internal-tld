@@ -60,11 +60,11 @@ private applications.
 There are certain circumstances in which private network operators may
 wish to use their own domain naming scheme that is not intended to be
 used or accessible by the global domain name system (DNS), such as
-within closed corporate or home networks.
+within corporate or home networks.
 
 The "internal" top-level domain provides this purpose in the DNS. Such
 domains will not resolve in the global DNS, but can be configured within
-closed networks. It fulfills a purpose similar to private-use IP address
+private networks. It fulfills a purpose similar to private-use IP address
 ranges (e.g. {{RFC1918}}), but in the DNS space.
 
 # Using the "internal" Namespace
@@ -88,8 +88,7 @@ of this decision, including:
 2. The risk of leakage of "internal" names into the global DNS, and t
 3. The lack of global uniqueness of "internal" names.
 
-DNSSEC validating resolvers relying on the global DNS trust anchor will
-currently fail to resolve names ending in "internal".
+DNSSEC validating resolvers relying on the global DNS trust anchor will fail to resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
