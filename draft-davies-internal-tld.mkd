@@ -64,31 +64,34 @@ within corporate or home networks.
 
 The "internal" top-level domain provides this purpose in the DNS. Such
 domains will not resolve in the global DNS, but can be configured within
-private networks as the network operator sees fit. It fulfills a purpose similar to private-use IP address
-ranges (e.g. {{RFC1918}}), but in the DNS.
+private networks as the network operator sees fit. It fulfills a purpose
+similar to private-use IP address ranges (e.g. {{RFC1918}}), but in the
+DNS.
 
 # Using the "internal" Namespace
 
-Network operators have been using using a variety of unregistered names for private-use
-DNS for many years. This usage has been uncoordinated and can result
-in incompatibilities or harm to Internet users. For example, an
-organization might choose to use a name for this purpose that has not
-been assigned to them. This name could later appear in the global DNS, thereby
-causing name collisions and undefined behavior for users.
+Network operators have been using using a variety of unregistered names
+for private-use DNS for many years. This usage has been uncoordinated
+and can result in incompatibilities or harm to Internet users. For
+example, an organization might choose to use a name for this purpose
+that has not been assigned to them. This name could later appear in the
+global DNS, thereby causing name collisions and undefined behavior for
+users.
 
-In almost all cases, an entity should use a sub-domain of a global DNS name
-that it controls. This ensures that names are globally unique and avoids the
-potential for confusion that may arise from the use of private-use namespaces.
-However, in some cases, such as for isolated networks that will never be
-connected to the global Internet, use of the "internal" top-level domain may be
-appropriate. Entities choosing to do so should be cognizant of the implications
-of this decision, including:
+In almost all cases, an entity should use a sub-domain of a global DNS
+name that it controls. This ensures that names are globally unique
+and avoids the potential for confusion that may arise from the use of
+private-use namespaces. However, in some cases, such as for isolated
+networks that will never be connected to the global Internet, use of the
+"internal" top-level domain may be appropriate. Entities choosing to do
+so should be cognizant of the implications of this decision, including:
+
 1. The potential for collisions if multiple networks using "internal" are
    interconnected in the future
 2. The risk of leakage of "internal" names into the global DNS, and
 3. The lack of global uniqueness of "internal" names and
-
-4 . DNSSEC validating resolvers relying on the global DNS trust anchor will fail to resolve names ending in "internal".
+4. DNSSEC validating resolvers relying on the global DNS trust anchor
+   will fail to resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
@@ -138,12 +141,12 @@ aware of this when performing operations requiring authenticity, such as
 entering credentials.
 
 Given the lack of uniqueness, users should be aware that collisions
-may occur if the same name is used in different "internal" networks, for
-example if two organizations using "internal" interconnect their networks. This
-is similar to the potential for IP address collisions when interconnecting
-networks using private-use IP address ranges (e.g., {{RFC1918}}). Organizations
-should consider these implications when deciding whether to use the "internal"
-namespace.
+may occur if the same name is used in different "internal" networks,
+for example if two organizations using "internal" interconnect their
+networks. This is similar to the potential for IP address collisions
+when interconnecting networks using private-use IP address ranges (e.g.,
+{{RFC1918}}). Organizations should consider these implications when
+deciding whether to use the "internal" namespace.
 
 Users should also not assume the appearance of such names is indicative
 of the true source of transmissions. When diagnosing network issues, the
