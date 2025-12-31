@@ -30,7 +30,6 @@ author:
     email: warren@kumari.net
 informative:
   RFC1918:
-  RFC6761:
   RFC6762:
   RFC7788:
   RFC8375:
