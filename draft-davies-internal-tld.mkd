@@ -176,24 +176,19 @@ the best suited string given the requirement that a single string be
 selected for this purpose, and subsequently reserved for this purpose in
 July 2024. {{ICANN-Board-Resolution}}
 
-# Acknowledgements
-The authors would like to thank the members of the Internet community who
-participated in the discussions that led to the establishment of the "internal"
-top-level domain, including those who contributed to the SAC113 advisory and
-the IANA assessment process.
+# Acknowledgments
 
-The authors would especially like to thank the IETF Independent Submissions
-Editor (ISE) for the many hours of discussion and feedback on this document,
-and for chasing us when we got sidetracked.
-
-We would also like to thank the DNSOP chairs, and IETF DNSOP working group
-members, including Benno Overeinder, David Lawrence, Joe Abley, John Levine,
-Mark Andrews, Ondrej Surý, Paul Hoffman, Peter Thomassen, Petr Špaček, Philip
-Homburg, Suzanne Woolf, Wes Hardaker, for their feedback and suggestions on
-this document. {Warren's note: I am sure there are many others who contributed
-feedback on this document who I have forgotten to mention - please poke me and
-I will be happy to add you to this list!}
-
+The authors would like to thank the members of the Internet community
+who participated in the discussions that led to the establishment of
+the "internal" top-level domain, including those who contributed to the
+SAC113 advisory and the IANA assessment process.
+ 
+The authors would especially like to thank Eliot Lear for extensive
+discussion and feedback on this document. Additional feedback and
+suggestions were received from Joe Abley, Mark Andrews, Wes Hardakerm
+Paul Hoffman, Philip Homburg, David Lawrence, John Levine, Benno
+Overeinder, Petr Špaček, Ondrej Surý, Peter Thomassen and Suzanne
+Woolf.
 
 --- back
 
