@@ -156,7 +156,7 @@ to recognize its limitations and potential risks:
    private Certificate Authority (CA), which is beyond the scope of this
    document.
 
-6. ** User confusion**: Users should also not assume the appearance of such
+6. **Impacts on traceability**: Users should also not assume the appearance of such
    names is indicative of the true source of transmissions. When diagnosing
    network issues, the appearance of such addresses must be interpreted with
    the associated context to ascertain the private network with which the name
