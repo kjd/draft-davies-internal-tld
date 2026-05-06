@@ -56,113 +56,112 @@ private applications.
 
 # Introduction
 
-There are certain circumstances in which private network operators may
+There are situations in which private network operators may
 wish to use their own domain naming scheme that is not intended to be
 used or accessible by the global domain name system (DNS), such as
 within corporate or home networks.
 
-The "internal" top-level domain provides this purpose in the DNS. Such
-domains will not resolve in the global DNS, but can be configured within
-private networks as the network operator sees fit. It fulfills a purpose
-similar to private-use IP address ranges (e.g. {{RFC1918}}), but in the
-DNS.
+The "internal" top-level domain (TLD) is specifically designated for this
+purpose. Domains under this TLD are not resolvable in the global DNS but can be
+configured and utilized within private networks according to the operator's
+requirements. This concept is analogous to private-use IP address ranges (e.g.,
+{{RFC1918}}), providing a similar function within the DNS ecosystem.
 
 # Using the "internal" Namespace
 
-Network operators have been using using a variety of unregistered names
-for private-use DNS for many years. This usage has been uncoordinated
-and can result in incompatibilities or harm to Internet users. For
-example, an organization might choose to use a name for this purpose
-that has not been assigned to them. This name could later appear in the
-global DNS, thereby causing name collisions and undefined behavior for
-users.
+Network operators have long relied on various unregistered names for
+private-use DNS, often in an uncoordinated manner. This practice can lead to
+incompatibilities and unintended consequences for Internet users. For instance,
+an organization might adopt a name for internal use that is later introduced
+into the global DNS, resulting in name collisions and unpredictable behavior.
 
 In almost all cases, an entity should use a sub-domain of a global DNS
 name that it controls. This ensures that names are globally unique
 and avoids the potential for confusion that may arise from the use of
 private-use namespaces. However, in some cases, such as for isolated
 networks that will never be connected to the global Internet, use of the
-"internal" top-level domain may be appropriate. Entities choosing to do
-so should be cognizant of the implications of this decision, including:
+"internal" top-level domain may be appropriate.
+
+Entities choosing to do so should be cognizant of the implications of this
+decision, including:
 
 1. The potential for collisions if multiple networks using "internal" are
-   interconnected in the future
-2. The risk of leakage of "internal" names into the global DNS, and
-3. The lack of global uniqueness of "internal" names and
-4. DNSSEC validating resolvers relying on the global DNS trust anchor
-   will fail to resolve names ending in "internal".
+   interconnected in the future.
+2. The risk of leakage of "internal" names into the global DNS.
+3. The lack of global uniqueness of "internal" names.
+4. DNSSEC validating resolvers relying on the global DNS trust anchor will fail
+   to resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
-Other namespaces are reserved for similar purposes, which superficially
-may seem to serve the same purpose as the "internal" domain, but are
-intended for different use cases.
+Other namespaces are reserved for similar purposes, which superficially may
+seem to serve the same purpose as the "internal" domain, but are intended for
+different use cases.
 
-* The "local" namespace {{RFC6762}} is reserved for use with the
-  multicast DNS protocol. This protocol allows for resolution between
-  devices on a local network. This namespace does not use typical DNS
-  zones for name allocation, and instead uses the multicast DNS protocol
-  to negotiate names and resolve conflicts. It is expected "internal" will
-  be used for applications where names are specified in locally-configured
-  zones.
+* The "local" namespace {{RFC6762}} is reserved for use with the multicast DNS
+  protocol. This protocol allows for resolution between devices on a local
+  network. This namespace does not use typical DNS zones for name allocation,
+  and instead uses the multicast DNS protocol to negotiate names and resolve
+  conflicts. It is expected "internal" will be used for applications where
+  names are specified in locally-configured zones.
 
-* The "alt" namespace {{RFC9476}} is reserved for contexts where
-  identifiers are used that may look like domain names, but do not use
-  the DNS protocol for resolution. This is in contrast to the "internal"
-  domain which is to be used with the DNS protocol, but in limited
-  private-use network scope.
+* The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers
+  are used that may look like domain names, but do not use the DNS protocol for
+  resolution. This is in contrast to the "internal" domain which is to be used
+  with the DNS protocol, but in limited private-use network scope.
 
-* The "home.arpa" namespace {{RFC8375}} is reserved for use within
-  residential networks, including with the Home Networking Control Protocol
-  {{RFC7788}}.
+* The "home.arpa" namespace {{RFC8375}} is reserved for use within residential
+  networks, including with the Home Networking Control Protocol {{RFC7788}}.
 
 # IANA Considerations
 
-The document requires no IANA actions. For the reasons stated above,
-the "internal" top-level domain is reserved from being used in the
-global DNS.
+The document requires no IANA actions. For the reasons stated above, the
+"internal" top-level domain is reserved from being used in the global DNS.
 
 # Security Considerations
 
-While the namespace is designated for private use, there is no guarantee
-that the names utilized in this namespace will not leak into the broader
-Internet. Since usage may appear in log files, email headers, and the
-like; users should not rely on the confidentiality of the "internal"
-namespace.
+While the "internal" namespace is designated for private use, it is important
+to recognize its limitations and potential risks:
 
-Users should not expect that names in the "internal" namespace are
-globally unique; it is assumed that many of the same names will be used
-for entirely different purposes on different networks. This is similar
-to the use of the "local" namespace in the multicast DNS protocol - just
-as there are many different devices named "printer.local", there may
-be many different servers named "accounting.internal". Users should be
-aware of this when performing operations requiring authenticity, such as
-entering credentials.
+1. **Leakage into the broader Internet**: Names within the "internal" namespace
+   may inadvertently appear in log files, email headers, or other contexts,
+   leading to potential exposure. Users should not rely on the confidentiality
+   of these names.
 
-Given the lack of uniqueness, users should be aware that collisions
-may occur if the same name is used in different "internal" networks,
-for example if two organizations using "internal" interconnect their
-networks. This is similar to the potential for IP address collisions
-when interconnecting networks using private-use IP address ranges (e.g.,
-{{RFC1918}}). Organizations should consider these implications when
-deciding whether to use the "internal" namespace.
+2. **Lack of global uniqueness**: Names in the "internal" namespace are not
+   globally unique. For example, multiple networks may use the same name, such
+   as "accounting.internal," for entirely different purposes. This is similar
+   to the use of the "local" namespace in multicast DNS, where many devices
+   might share the name "printer.local." Users should exercise caution when
+   performing operations that require authenticity, such as entering
+   credentials.
 
-Users should also not assume the appearance of such names is indicative
-of the true source of transmissions. When diagnosing network issues, the
-appearance of such addresses must be interpreted with the associated
-context to ascertain the private network with which the name is being
-used. A name within the "internal" namespace can never be used by itself
-to identify the origin of a communication.
+3. **Collision risks**: If two networks using the "internal" namespace are
+   interconnected, name collisions may occur. This is analogous to IP address
+   conflicts when private-use IP ranges (e.g., {{RFC1918}}) are interconnected.
+   Organizations should carefully evaluate this risk before adopting the
+   "internal" namespace.
 
-The lack of global uniqueness also has implications for HTTP cookies;
-a cookie set for "accounting.internal" on one network may be sent to a
-different "accounting.internal" if the user changes their local network.
-This may be mitigated by adding the Secure flag to the cookie. It is
-expected that Certificate Authorities will not issue certificates for
-the "internal" namespace as it does not resolve in the global DNS. If an
-organization wants to use HTTP over TLS with names in the "internal"
-namespace, they will also need an internal, private CA. The details of
-this are outside the scope of this document.
+4. **DNSSEC limitations**: DNSSEC-validating resolvers that rely on the global
+   DNS trust anchor will fail to resolve names ending in "internal." This
+   limitation should be considered when planning network configurations.
+
+5. **Implications for HTTP cookies**: Cookies set for a domain like
+   "accounting.internal" on one network may be sent to a different
+   "accounting.internal" if the user switches networks. To mitigate this,
+   organizations can use the Secure flag for cookies. Additionally, since the
+   "internal" namespace does not resolve in the global DNS, Certificate
+   Authorities are not expected to issue certificates for it. Organizations
+   requiring HTTPS for "internal" domains will need to establish their own
+   private Certificate Authority (CA), which is beyond the scope of this
+   document.
+
+6. ** User confusion**: Users should also not assume the appearance of such
+   names is indicative of the true source of transmissions. When diagnosing
+   network issues, the appearance of such addresses must be interpreted with
+   the associated context to ascertain the private network with which the name
+   is being used. A name within the "internal" namespace can never be used by
+   itself to identify the origin of a communication.
 
 # Additional Information
 
@@ -176,6 +175,25 @@ A selection process {{IANA-Assessment}} determined "internal" was
 the best suited string given the requirement that a single string be
 selected for this purpose, and subsequently reserved for this purpose in
 July 2024. {{ICANN-Board-Resolution}}
+
+# Acknowledgements
+The authors would like to thank the members of the Internet community who
+participated in the discussions that led to the establishment of the "internal"
+top-level domain, including those who contributed to the SAC113 advisory and
+the IANA assessment process.
+
+The authors would especially like to thank the IETF Independent Submissions
+Editor (ISE) for the many hours of discussion and feedback on this document,
+and for chasing us when we got sidetracked.
+
+We would also like to thank the DNSOP chairs, and IETF DNSOP working group
+members, including Benno Overeinder, David Lawrence, Joe Abley, John Levine,
+Mark Andrews, Ondrej Surý, Paul Hoffman, Peter Thomassen, Petr Špaček, Philip
+Homburg, Suzanne Woolf, Wes Hardaker, for their feedback and suggestions on
+this document. {Warren's note: I am sure there are many others who contributed
+feedback on this document who I have forgotten to mention - please poke me and
+I will be happy to add you to this list!}
+
 
 --- back
 
