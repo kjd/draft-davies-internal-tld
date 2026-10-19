@@ -188,7 +188,7 @@ The authors would especially like to thank Eliot Lear for extensive
 discussion and feedback on this document. Additional feedback and
 suggestions were received from Joe Abley, Mark Andrews, Wes Hardaker,
 Paul Hoffman, Philip Homburg, David Lawrence, John Levine, Benno
-Overeinder, Petr Špaček, Ondrej Surý, Peter Thomassen and Suzanne
+Overeinder, Petr Špaček, Ondřej Surý, Peter Thomassen and Suzanne
 Woolf.
 
 --- back
