@@ -79,8 +79,10 @@ In almost all cases, an entity should use a subdomain of a global DNS
 name that it controls. This ensures that names are globally unique
 and avoids the potential for confusion that may arise from the use of
 private-use namespaces. However, in some cases, such as for isolated
-networks that will never be connected to the global Internet, use of the
-"internal" top-level domain may be appropriate.
+networks that will never be connected to the global Internet, use of
+the "internal" top-level domain may be appropriate. One such example
+could be for communication between services within containers and other
+virtualized environments.
 
 Entities choosing to do so should be cognizant of the implications of this
 decision, including:
