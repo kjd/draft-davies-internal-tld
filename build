@@ -1,6 +1,9 @@
 #!/bin/bash
 
 kramdown-rfc2629 draft-davies-internal-tld.mkd > draft-davies-internal-tld.xml
+# Convert v2-style <list> elements to v3 <ul>/<ol>, then strip kramdown-rfc's
+# <?line?> source-mapping processing instructions, so the XML passes idnits
+xml2rfc --v2v3 draft-davies-internal-tld.xml -o draft-davies-internal-tld.xml
+sed -E -i '' '/^[[:space:]]*<\?line -?[0-9]+\?>[[:space:]]*$/d' draft-davies-internal-tld.xml
 xml2rfc draft-davies-internal-tld.xml
 xml2rfc --html --v3 draft-davies-internal-tld.xml
-
