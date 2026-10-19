@@ -1,6 +1,6 @@
 ---
 title: A Top-level Domain for Private Use
-abbrev: Private use top-level domain
+abbrev: Private-Use TLD
 docname: draft-davies-internal-tld-latest
 stand_alone: true
 stream: independent
@@ -58,12 +58,12 @@ private applications.
 
 There are situations in which private network operators may
 wish to use their own domain naming scheme that is not intended to be
-used or accessible by the global domain name system (DNS), such as
+used or accessible via the global domain name system (DNS), such as
 within corporate or home networks.
 
 The "internal" top-level domain (TLD) is specifically designated for this
-purpose. Domains under this TLD are not resolvable in the global DNS but can be
-configured and utilized within private networks according to the operator's
+purpose. Names under this TLD are not resolvable in the global DNS but can be
+configured and used within private networks according to the operator's
 requirements. This concept is analogous to private-use IP address ranges (e.g.,
 {{RFC1918}}), providing a similar function within the DNS ecosystem.
 
@@ -75,7 +75,7 @@ incompatibilities and unintended consequences for Internet users. For instance,
 an organization might adopt a name for internal use that is later introduced
 into the global DNS, resulting in name collisions and unpredictable behavior.
 
-In almost all cases, an entity should use a sub-domain of a global DNS
+In almost all cases, an entity should use a subdomain of a global DNS
 name that it controls. This ensures that names are globally unique
 and avoids the potential for confusion that may arise from the use of
 private-use namespaces. However, in some cases, such as for isolated
@@ -89,21 +89,20 @@ decision, including:
    interconnected in the future.
 2. The risk of leakage of "internal" names into the global DNS.
 3. The lack of global uniqueness of "internal" names.
-4. DNSSEC validating resolvers relying on the global DNS trust anchor will fail
+4. DNSSEC-validating resolvers relying on the global DNS trust anchor will fail
    to resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
-Other namespaces are reserved for similar purposes, which superficially may
-seem to serve the same purpose as the "internal" domain, but are intended for
-different use cases.
+Several other reserved namespaces may superficially appear to serve the same
+purpose as "internal", but are intended for different use cases.
 
 * The "local" namespace {{RFC6762}} is reserved for use with the multicast DNS
   protocol. This protocol allows for resolution between devices on a local
   network. This namespace does not use typical DNS zones for name allocation,
   and instead uses the multicast DNS protocol to negotiate names and resolve
-  conflicts. It is expected "internal" will be used for applications where
-  names are specified in locally-configured zones.
+  conflicts. By contrast, "internal" is intended for applications where names
+  are specified in locally configured zones.
 
 * The "alt" namespace {{RFC9476}} is reserved for contexts where identifiers
   are used that may look like domain names, but do not use the DNS protocol for
@@ -115,8 +114,9 @@ different use cases.
 
 # IANA Considerations
 
-The document requires no IANA actions. For the reasons stated above, the
-"internal" top-level domain is reserved from being used in the global DNS.
+This document requires no IANA actions. The "internal" top-level domain has
+been reserved from delegation in the global DNS by the ICANN Board
+{{ICANN-Board-Resolution}}.
 
 # Security Considerations
 
@@ -130,9 +130,9 @@ to recognize its limitations and potential risks:
 
 2. **Lack of global uniqueness**: Names in the "internal" namespace are not
    globally unique. For example, multiple networks may use the same name, such
-   as "accounting.internal," for entirely different purposes. This is similar
+   as "accounting.internal", for entirely different purposes. This is similar
    to the use of the "local" namespace in multicast DNS, where many devices
-   might share the name "printer.local." Users should exercise caution when
+   might share the name "printer.local". Users should exercise caution when
    performing operations that require authenticity, such as entering
    credentials.
 
@@ -143,7 +143,7 @@ to recognize its limitations and potential risks:
    "internal" namespace.
 
 4. **DNSSEC limitations**: DNSSEC-validating resolvers that rely on the global
-   DNS trust anchor will fail to resolve names ending in "internal." This
+   DNS trust anchor will fail to resolve names ending in "internal". This
    limitation should be considered when planning network configurations.
 
 5. **Implications for HTTP cookies**: Cookies set for a domain like
@@ -156,25 +156,24 @@ to recognize its limitations and potential risks:
    private Certificate Authority (CA), which is beyond the scope of this
    document.
 
-6. **Impacts on traceability**: Users should also not assume the appearance of such
+6. **Impacts on traceability**: Users should not assume the appearance of such
    names is indicative of the true source of transmissions. When diagnosing
-   network issues, the appearance of such addresses must be interpreted with
+   network issues, the appearance of such names must be interpreted with
    the associated context to ascertain the private network with which the name
    is being used. A name within the "internal" namespace can never be used by
    itself to identify the origin of a communication.
 
 # Additional Information
 
-This reservation is the result of a community deliberation on this
-topic over many years, most notably {{SAC113}}. The SAC113 advisory
+This reservation is the result of community deliberations on this
+topic over many years, culminating in {{SAC113}}. The SAC113 advisory
 recommended the establishment of a single top-level domain for
-private-use applications. DNS records within this top-level domain
-will not be resolvable in contexts outside of a private network.
+private-use applications.
 
-A selection process {{IANA-Assessment}} determined "internal" was
-the best suited string given the requirement that a single string be
-selected for this purpose, and subsequently reserved for this purpose in
-July 2024. {{ICANN-Board-Resolution}}
+A selection process {{IANA-Assessment}} determined that "internal" was
+the best-suited string given the requirement that a single string be
+selected, and the ICANN Board reserved it for this purpose in July 2024
+{{ICANN-Board-Resolution}}.
 
 # Acknowledgments
 
@@ -182,10 +181,10 @@ The authors would like to thank the members of the Internet community
 who participated in the discussions that led to the establishment of
 the "internal" top-level domain, including those who contributed to the
 SAC113 advisory and the IANA assessment process.
- 
+
 The authors would especially like to thank Eliot Lear for extensive
 discussion and feedback on this document. Additional feedback and
-suggestions were received from Joe Abley, Mark Andrews, Wes Hardakerm
+suggestions were received from Joe Abley, Mark Andrews, Wes Hardaker,
 Paul Hoffman, Philip Homburg, David Lawrence, John Levine, Benno
 Overeinder, Petr Špaček, Ondrej Surý, Peter Thomassen and Suzanne
 Woolf.
