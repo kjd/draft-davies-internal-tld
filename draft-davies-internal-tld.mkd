@@ -31,6 +31,7 @@ author:
 informative:
   RFC1918:
   RFC4193:
+  RFC6761:
   RFC6762:
   RFC7788:
   RFC8375:
@@ -68,6 +69,10 @@ configured and used within private networks according to the operator's
 requirements. This concept is analogous to private-use IP address ranges (e.g.,
 {{RFC4193}}, {{RFC1918}}), providing a similar function within the DNS
 ecosystem.
+
+# Conventions and Definitions
+
+{::boilerplate bcp14-tagged}
 
 # Using the "internal" Namespace
 
@@ -118,9 +123,56 @@ purpose as "internal", but are intended for different use cases.
 
 # IANA Considerations
 
-This document requires no IANA actions. The "internal" top-level domain has
-been reserved from delegation in the global DNS by the ICANN Board
-{{ICANN-Board-Resolution}}.
+The "internal" top-level domain has been reserved from delegation in the
+global DNS by the ICANN Board {{ICANN-Board-Resolution}}.
+
+## Special-Use Domain Names Registry
+
+IANA is requested to add "internal" to the "Special-Use Domain Names"
+registry {{RFC6761}}, with a reference to this document.
+
+### Domain Name Reservation Considerations
+
+This section exists to meet the requirements of {{RFC6761}}. The answers
+below are adapted from Section 6.1 of {{RFC6761}}, "Domain Name
+Reservation Considerations for Private Addresses".
+
+1. Users are free to use these names within the "internal" top-level domain
+  as they would any other domain names.  However, since there is no central
+  authority responsible for use of these names, users should be aware that
+  these names are likely to yield different results on different networks.
+
+1. Application software SHOULD NOT recognize these names as special, and SHOULD
+   use these names as they would other domain names
+
+1. Name resolution APIs and libraries SHOULD NOT recognize these names as
+  special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
+  send queries for these names to their configured caching DNS server(s).
+
+1. Caching DNS servers SHOULD recognize these names as special and SHOULD NOT,
+  by default, attempt to look up NS records for them, or otherwise query
+  authoritative DNS servers in an attempt to resolve these names.  Instead,
+  caching DNS servers SHOULD, by default, generate immediate (positive or
+  negative) responses for all such queries.  This is to avoid unnecessary load
+  on the root name servers and other name servers.  Caching DNS servers SHOULD
+  offer a configuration option (disabled by default) to enable upstream
+  resolution of such names, for use in private networks where names ending in
+  ".internal" are known to be handled by an authoritative DNS server in that private
+  network.
+
+1. Authoritative DNS servers SHOULD NOT recognize these names as special unless
+   explicitly configured by the administrator for names within the
+   "internal" namespace.
+
+1. DNS server operators SHOULD, if they are using names within the "internal"
+  top-level domain, configure their authoritative DNS servers to act as
+  authoritative for these names.
+
+1. DNS Registries/Registrars MUST NOT grant requests to register any of these
+  names. These names are reserved for use in private networks, and fall outside
+  the set of names available for allocation by registries/registrars. Attempting
+  to allocate one of these names in the global DNS name will probably not work as
+  desired, for reasons 4, 5 and 6 above.
 
 # Security Considerations
 
@@ -189,9 +241,9 @@ SAC113 advisory and the IANA assessment process.
 The authors would especially like to thank Eliot Lear for extensive
 discussion and feedback on this document. Additional feedback and
 suggestions were received from Joe Abley, Mark Andrews, Brian Carpenter,
-Wes Hardaker, Paul Hoffman, Philip Homburg, David Lawrence, John Levine,
-Benno Overeinder, Petr Špaček, Ondřej Surý, Peter Thomassen and
-Suzanne Woolf.
+Stuart Cheshire, Wes Hardaker, Paul Hoffman, Philip Homburg, David
+Lawrence, John Levine, Benno Overeinder, Petr Špaček, Ondřej Surý,
+Peter Thomassen and Suzanne Woolf.
 
 --- back
 
