@@ -72,6 +72,30 @@ ecosystem.
 
 # Conventions and Definitions
 
+The document uses terms defined in {{RFC9499}}, in particular:
+
+* Authoritative server
+
+* Global DNS
+
+* Multicast DNS
+
+* Private DNS
+
+* Recursive resolver
+
+* Registrar
+
+* Registry
+
+* Resolver
+
+* Subdomain
+
+* Trust anchor
+
+* Validating resolver
+
 {::boilerplate bcp14-tagged}
 
 # Using the "internal" Namespace
@@ -85,14 +109,13 @@ into the global DNS, resulting in name collisions and unpredictable behavior.
 In almost all cases, an entity should use a subdomain of a global DNS
 name that it controls. This ensures that names are globally unique
 and avoids the potential for confusion that may arise from the use of
-private-use namespaces. However, in some cases, such as for isolated
-networks that will never be connected to the global Internet, use of
+private DNS namespaces. However, in some cases, such as for isolated
+networks that will never be connected to the global DNS, use of
 the "internal" top-level domain may be appropriate. One such example
 could be for communication between services within containers and other
 virtualized environments.
 
-Entities choosing to do so should be cognizant of the implications of this
-decision, including:
+Using the "internal" namespace comes with associated risks, including:
 
 1. The potential for collisions if multiple networks using "internal" are
    interconnected in the future.
@@ -143,40 +166,40 @@ Reservation Considerations for Private Addresses".
   these names are likely to yield different results on different networks.
 
 1. Application software SHOULD NOT recognize these names as special, and SHOULD
-   use these names as they would other domain names
+   use these names as they would other domain names.
 
 1. Name resolution APIs and libraries SHOULD NOT recognize these names as
   special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
   send queries for these names to their configured caching DNS server(s).
 
-1. Caching DNS servers SHOULD recognize these names as special and SHOULD NOT,
+1. Recursive resolvers SHOULD recognize these names as special and SHOULD NOT,
   by default, attempt to look up NS records for them, or otherwise query
-  authoritative DNS servers in an attempt to resolve these names.  Instead,
-  caching DNS servers SHOULD, by default, generate immediate (positive or
+  authoritative servers in an attempt to resolve these names.  Instead,
+  recursive resolvers SHOULD, by default, generate immediate (positive or
   negative) responses for all such queries.  This is to avoid unnecessary load
-  on the root name servers and other name servers.  Caching DNS servers SHOULD
+  on the root name servers and other name servers.  Recursive resolvers SHOULD
   offer a configuration option (disabled by default) to enable upstream
-  resolution of such names, for use in private networks where names ending in
-  ".internal" are known to be handled by an authoritative DNS server in that private
+  resolution of such names, for use in private DNS networks where names ending in
+  ".internal" are known to be handled by an authoritative server in that private
   network.
 
-1. Authoritative DNS servers SHOULD NOT recognize these names as special unless
+1. Authoritative servers SHOULD NOT recognize these names as special unless
    explicitly configured by the administrator for names within the
    "internal" namespace.
 
-1. DNS server operators SHOULD, if they are using names within the "internal"
-  top-level domain, configure their authoritative DNS servers to act as
+1. DNS operators SHOULD, if they are using names within the "internal"
+  top-level domain, configure their authoritative servers to act as
   authoritative for these names.
 
-1. DNS Registries/Registrars MUST NOT grant requests to register any of these
-  names. These names are reserved for use in private networks, and fall outside
-  the set of names available for allocation by registries/registrars. Attempting
-  to allocate one of these names in the global DNS name will probably not work as
+1. Registries and registrars MUST NOT grant requests to register any of these
+  names. These names are reserved for use in private DNS, and fall outside
+  the set of names available for allocation by registries and registrars. Attempting
+  to allocate one of these names in the global DNS will probably not work as
   desired, for reasons 4, 5 and 6 above.
 
 # Security Considerations
 
-While the "internal" namespace is designated for private use, it is important
+While the "internal" namespace is designated for private DNS, it is important
 to recognize its limitations and potential risks:
 
 1. **Leakage into the broader Internet**: Names within the "internal" namespace
@@ -198,8 +221,8 @@ to recognize its limitations and potential risks:
    interconnected. Organizations should carefully evaluate this risk before
    adopting the "internal" namespace.
 
-4. **DNSSEC limitations**: DNSSEC-validating resolvers that rely on the global
-   DNS trust anchor will fail to resolve names ending in "internal". This
+4. **DNSSEC limitations**: Validating resolvers that rely on the global
+   trust anchor will fail to resolve names ending in "internal". This
    limitation should be considered when planning network configurations.
 
 5. **Implications for HTTP cookies**: Cookies set for a domain like
@@ -224,7 +247,7 @@ to recognize its limitations and potential risks:
 This reservation is the result of community deliberations on this
 topic over many years, culminating in {{SAC113}}. The SAC113 advisory
 recommended the establishment of a single top-level domain for
-private-use applications.
+private DNS applications.
 
 A selection process {{IANA-Assessment}} determined that "internal" was
 the best-suited string given the requirement that a single string be
