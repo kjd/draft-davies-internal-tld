@@ -28,6 +28,8 @@ author:
     name: Warren Kumari
     org: Google
     email: warren@kumari.net
+normative:
+  RFC9499:
 informative:
   RFC1918:
   RFC4193:
@@ -72,36 +74,17 @@ ecosystem.
 
 # Conventions and Definitions
 
-The document uses terms defined in {{RFC9499}}, in particular:
-
-* Authoritative server
-
-* Global DNS
-
-* Multicast DNS
-
-* Private DNS
-
-* Recursive resolver
-
-* Registrar
-
-* Registry
-
-* Resolver
-
-* Subdomain
-
-* Trust anchor
-
-* Validating resolver
+This document uses DNS-specific terms as defined in {{RFC9499}},
+including authoritative server, DNS operator, global DNS, private DNS,
+recursive resolver, registrar, registry, resolver, subdomain, trust
+anchor and validating resolver.
 
 {::boilerplate bcp14-tagged}
 
 # Using the "internal" Namespace
 
 Network operators have long relied on various unregistered names for
-private-use DNS, often in an uncoordinated manner. This practice can lead to
+private DNS, often in an uncoordinated manner. This practice can lead to
 incompatibilities and unintended consequences for Internet users. For instance,
 an organization might adopt a name for internal use that is later introduced
 into the global DNS, resulting in name collisions and unpredictable behavior.
@@ -110,7 +93,7 @@ In almost all cases, an entity should use a subdomain of a global DNS
 name that it controls. This ensures that names are globally unique
 and avoids the potential for confusion that may arise from the use of
 private DNS namespaces. However, in some cases, such as for isolated
-networks that will never be connected to the global DNS, use of
+networks that will never be connected to the global Internet, use of
 the "internal" top-level domain may be appropriate. One such example
 could be for communication between services within containers and other
 virtualized environments.
@@ -121,8 +104,8 @@ Using the "internal" namespace comes with associated risks, including:
    interconnected in the future.
 2. The risk of leakage of "internal" names into the global DNS.
 3. The lack of global uniqueness of "internal" names.
-4. DNSSEC-validating resolvers relying on the global DNS trust anchor will fail
-   to resolve names ending in "internal".
+4. Validating resolvers relying on the global trust anchor will fail to
+   resolve names ending in "internal".
 
 # Comparisons to Similar Namespaces
 
@@ -170,7 +153,7 @@ Reservation Considerations for Private Addresses".
 
 1. Name resolution APIs and libraries SHOULD NOT recognize these names as
   special and SHOULD NOT treat them differently.  Name resolution APIs SHOULD
-  send queries for these names to their configured caching DNS server(s).
+  send queries for these names to their configured recursive resolver(s).
 
 1. Recursive resolvers SHOULD recognize these names as special and SHOULD NOT,
   by default, attempt to look up NS records for them, or otherwise query
@@ -179,9 +162,9 @@ Reservation Considerations for Private Addresses".
   negative) responses for all such queries.  This is to avoid unnecessary load
   on the root name servers and other name servers.  Recursive resolvers SHOULD
   offer a configuration option (disabled by default) to enable upstream
-  resolution of such names, for use in private DNS networks where names ending in
-  ".internal" are known to be handled by an authoritative server in that private
-  network.
+  resolution of such names, for use in private networks where names ending in
+  ".internal" are known to be handled by an authoritative server in that
+  private network.
 
 1. Authoritative servers SHOULD NOT recognize these names as special unless
    explicitly configured by the administrator for names within the
@@ -192,15 +175,15 @@ Reservation Considerations for Private Addresses".
   authoritative for these names.
 
 1. Registries and registrars MUST NOT grant requests to register any of these
-  names. These names are reserved for use in private DNS, and fall outside
-  the set of names available for allocation by registries and registrars. Attempting
-  to allocate one of these names in the global DNS will probably not work as
-  desired, for reasons 4, 5 and 6 above.
+  names. These names are reserved for use in private networks, and fall
+  outside the set of names available for allocation by registries and
+  registrars. Attempting to allocate one of these names in the global DNS will
+  probably not work as desired, for reasons 4, 5 and 6 above.
 
 # Security Considerations
 
-While the "internal" namespace is designated for private DNS, it is important
-to recognize its limitations and potential risks:
+While the "internal" namespace is designated for use in private DNS, it is
+important to recognize its limitations and potential risks:
 
 1. **Leakage into the broader Internet**: Names within the "internal" namespace
    may inadvertently appear in log files, email headers, or other contexts,
@@ -247,7 +230,7 @@ to recognize its limitations and potential risks:
 This reservation is the result of community deliberations on this
 topic over many years, culminating in {{SAC113}}. The SAC113 advisory
 recommended the establishment of a single top-level domain for
-private DNS applications.
+private-use applications.
 
 A selection process {{IANA-Assessment}} determined that "internal" was
 the best-suited string given the requirement that a single string be
